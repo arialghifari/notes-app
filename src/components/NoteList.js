@@ -1,12 +1,23 @@
 import React from 'react';
-import NoteItem from './NoteItem';
+import ActiveNotes from './ActiveNotes';
+import ArchivedNotes from './ArchivedNotes';
 
-function NoteList({ notes }) {
+function NoteList({ notes, onDelete, onArchive, onUnarchive }) {
+  const filterActiveNotes = notes.filter((note) => !note.archived);
+  const filterArchivedNotes = notes.filter((note) => note.archived);
+
   return (
     <div className='note-list'>
-      {notes.map((note) => (
-        <NoteItem key={note.id} {...note} />
-      ))}
+      <ActiveNotes
+        notes={filterActiveNotes}
+        onDelete={onDelete}
+        onArchive={onArchive}
+      />
+      <ArchivedNotes
+        notes={filterArchivedNotes}
+        onDelete={onDelete}
+        onUnarchive={onUnarchive}
+      />
     </div>
   );
 }
