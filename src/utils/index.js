@@ -45,12 +45,12 @@ const getInitialData = () => [
 
 const showFormattedDate = (date) => {
   const options = {
-    weekday: 'long',
+    weekday: 'short',
     year: 'numeric',
-    month: 'long',
     day: 'numeric',
+    month: 'short',
   };
-  return new Date(date).toLocaleDateString('id-ID', options);
+  return new Date(date).toLocaleDateString(['en-UK'], options);
 };
 
 export { getInitialData, showFormattedDate };
