@@ -1,4 +1,3 @@
-import React from 'react';
 import ActiveNotes from './ActiveNotes';
 import ArchivedNotes from './ArchivedNotes';
 

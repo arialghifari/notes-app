@@ -1,4 +1,7 @@
 import { showFormattedDate } from '../utils';
+import ButtonArchive from './ButtonArchive';
+import ButtonDelete from './ButtonDelete';
+import ButtonUnarchive from './ButtonUnarchive';
 
 function NoteItem({
   id,
@@ -15,12 +18,12 @@ function NoteItem({
       <h3>{title}</h3>
       <p>{showFormattedDate(createdAt)}</p>
       <p>{body}</p>
-      <button onClick={() => onDelete(id)}>Delete</button>
 
+      <ButtonDelete onDelete={onDelete} id={id} />
       {archived ? (
-        <button onClick={() => onUnarchive(id)}>Unarchive</button>
+        <ButtonUnarchive onUnarchive={onUnarchive} id={id} />
       ) : (
-        <button onClick={() => onArchive(id)}>Archive</button>
+        <ButtonArchive onArchive={onArchive} id={id} />
       )}
     </div>
   );

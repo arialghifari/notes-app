@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import WordCounter from './WordCounter';
 
 export class NoteInput extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export class NoteInput extends Component {
 
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onBodyChange = this.onBodyChange.bind(this);
-    this.onSubmitNote = this.onSubmitNote.bind(this);
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
 
   onTitleChange(e) {
@@ -36,18 +37,19 @@ export class NoteInput extends Component {
     });
   }
 
-  onSubmitNote(e) {
+  onSubmitHandler(e) {
     e.preventDefault();
     this.props.addNote({ title: this.state.title, body: this.state.body });
-    this.setState({ title: '', body: '', counter: 50 });
+    this.setState(() => {
+      return { title: '', body: '', counter: 50 };
+    });
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.onSubmitNote}>
-          <p>{this.state.counter} character left</p>
-
+        <form onSubmit={this.onSubmitHandler}>
+          <WordCounter counter={this.state.counter} />
           <input
             type='text'
             name='title'

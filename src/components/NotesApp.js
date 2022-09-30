@@ -16,30 +16,36 @@ export class NotesApp extends Component {
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
-    this.onAddNote = this.onAddNote.bind(this);
-    this.onSearch = this.onSearch.bind(this);
+    this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
+    this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
   onDeleteHandler(id) {
     const notes = this.state.notes.filter((note) => note.id !== id);
-    this.setState({ notes });
+    this.setState(() => {
+      return { notes };
+    });
   }
 
   onArchiveHandler(id) {
     const notes = this.state.notes.map((note) =>
       note.id === id ? { ...note, archived: true } : note
     );
-    this.setState({ notes });
+    this.setState(() => {
+      return { notes };
+    });
   }
 
   onUnarchiveHandler(id) {
     const notes = this.state.notes.map((note) =>
       note.id === id ? { ...note, archived: false } : note
     );
-    this.setState({ notes });
+    this.setState(() => {
+      return { notes };
+    });
   }
 
-  onAddNote({ title, body }) {
+  onAddNoteHandler({ title, body }) {
     this.setState((prevState) => {
       return {
         notes: [
@@ -52,15 +58,16 @@ export class NotesApp extends Component {
             archived: false,
           },
         ],
+        search: '',
       };
     });
   }
 
-  onSearch(title) {
+  onSearchHandler(search) {
     this.setState((prevState) => {
       return {
         ...prevState,
-        search: title,
+        search,
       };
     });
   }
@@ -68,8 +75,8 @@ export class NotesApp extends Component {
   render() {
     return (
       <>
-        <SearchBar onSearch={this.onSearch} />
-        <NoteInput addNote={this.onAddNote} />
+        <SearchBar search={this.state.search} onSearch={this.onSearchHandler} />
+        <NoteInput addNote={this.onAddNoteHandler} />
 
         <NoteList
           notes={this.state.notes}
