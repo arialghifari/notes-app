@@ -12,39 +12,47 @@ export class NoteInput extends Component {
 
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onBodyChange = this.onBodyChange.bind(this);
+    this.onSubmitNote = this.onSubmitNote.bind(this);
   }
 
-  onTitleChange(event) {
-    if (event.target.value.length > 50) return;
+  onTitleChange(e) {
+    if (e.target.value.length > 50) return;
 
     this.setState((prevState) => {
       return {
         ...prevState,
-        title: event.target.value,
-        counter: 50 - event.target.value.length,
+        title: e.target.value,
+        counter: 50 - e.target.value.length,
       };
     });
   }
 
-  onBodyChange(event) {
+  onBodyChange(e) {
     this.setState((prevState) => {
       return {
         ...prevState,
-        body: event.target.value,
+        body: e.target.value,
       };
     });
+  }
+
+  onSubmitNote(e) {
+    e.preventDefault();
+    this.props.addNote({ title: this.state.title, body: this.state.body });
+    this.setState({ title: '', body: '', counter: 50 });
   }
 
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.onSubmitNote}>
           <p>{this.state.counter} character left</p>
 
           <input
             type='text'
             name='title'
             placeholder='Title'
+            required
             value={this.state.title}
             onChange={this.onTitleChange}
           />
@@ -54,7 +62,7 @@ export class NoteInput extends Component {
             value={this.state.body}
             onChange={this.onBodyChange}
           ></textarea>
-          <button>Create Note</button>
+          <button type='submit'>Create Note</button>
         </form>
       </div>
     );

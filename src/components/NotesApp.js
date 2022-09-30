@@ -14,6 +14,7 @@ export class NotesApp extends Component {
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
+    this.onAddNote = this.onAddNote.bind(this);
   }
 
   onDeleteHandler(id) {
@@ -35,10 +36,27 @@ export class NotesApp extends Component {
     this.setState({ notes });
   }
 
+  onAddNote({ title, body }) {
+    this.setState((prevState) => {
+      return {
+        notes: [
+          ...prevState.notes,
+          {
+            id: +new Date(),
+            title,
+            body,
+            createdAt: '2022-09-14T04:27:34.572Z',
+            archived: false,
+          },
+        ],
+      };
+    });
+  }
+
   render() {
     return (
       <>
-        <NoteInput />
+        <NoteInput addNote={this.onAddNote} />
 
         <NoteList
           notes={this.state.notes}
