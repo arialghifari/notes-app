@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { getInitialData } from '../utils';
+import NoteInput from './NoteInput';
 import NoteList from './NoteList';
 
 export class NotesApp extends Component {
@@ -37,6 +38,8 @@ export class NotesApp extends Component {
   render() {
     return (
       <>
+        <NoteInput />
+
         <NoteList
           notes={this.state.notes}
           onDelete={this.onDeleteHandler}

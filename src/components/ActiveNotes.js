@@ -5,7 +5,7 @@ function ActiveNote({ notes, onDelete, onArchive }) {
     <>
       <h2>My Note</h2>
       {notes.length <= 0 ? (
-        <p>Kosong</p>
+        <p>Empty notes</p>
       ) : (
         notes.map((note) => (
           <NoteItem

@@ -5,7 +5,7 @@ function ArchivedNote({ notes, onDelete, onUnarchive }) {
     <>
       <h2>Archived</h2>
       {notes.length <= 0 ? (
-        <p>Kosong</p>
+        <p>Empty notes</p>
       ) : (
         notes.map((note) => (
           <NoteItem
