@@ -58,7 +58,7 @@ export class NoteInput extends Component {
           />
           <textarea
             name='body'
-            placeholder='Take a note...'
+            placeholder='Take a note'
             value={this.state.body}
             onChange={this.onBodyChange}
           ></textarea>

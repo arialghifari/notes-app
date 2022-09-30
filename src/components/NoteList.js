@@ -2,9 +2,13 @@ import React from 'react';
 import ActiveNotes from './ActiveNotes';
 import ArchivedNotes from './ArchivedNotes';
 
-function NoteList({ notes, onDelete, onArchive, onUnarchive }) {
-  const filterActiveNotes = notes.filter((note) => !note.archived);
-  const filterArchivedNotes = notes.filter((note) => note.archived);
+function NoteList({ notes, onDelete, onArchive, onUnarchive, search }) {
+  const filterActiveNotes = notes.filter(
+    (note) => !note.archived && note.title.toLowerCase().includes(search)
+  );
+  const filterArchivedNotes = notes.filter(
+    (note) => note.archived && note.title.toLowerCase().includes(search)
+  );
 
   return (
     <div className='note-list'>
