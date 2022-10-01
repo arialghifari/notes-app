@@ -1,7 +1,5 @@
 import { showFormattedDate } from '../utils';
-import ButtonArchive from './ButtonArchive';
-import ButtonDelete from './ButtonDelete';
-import ButtonUnarchive from './ButtonUnarchive';
+import Button from './Button';
 
 function NoteItem({
   id,
@@ -15,16 +13,20 @@ function NoteItem({
 }) {
   return (
     <div className='note-item'>
-      <h3>{title}</h3>
-      <p>{showFormattedDate(createdAt)}</p>
-      <p>{body}</p>
+      <div className='note-wrap'>
+        <h3>{title}</h3>
+        <p className='date'>{showFormattedDate(createdAt)}</p>
+        <p className='body'>{body}</p>
+      </div>
 
-      <ButtonDelete onDelete={onDelete} id={id} />
-      {archived ? (
-        <ButtonUnarchive onUnarchive={onUnarchive} id={id} />
-      ) : (
-        <ButtonArchive onArchive={onArchive} id={id} />
-      )}
+      <div className='button-wrap'>
+        <Button id={id} type={onDelete} text='Delete' />
+        {archived ? (
+          <Button id={id} type={onUnarchive} text='Unarchive' />
+        ) : (
+          <Button id={id} type={onArchive} text='Archive' />
+        )}
+      </div>
     </div>
   );
 }

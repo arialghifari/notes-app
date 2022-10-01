@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { getInitialData } from '../utils';
+import Header from './Header';
 import NoteInput from './NoteInput';
 import NoteList from './NoteList';
-import SearchBar from './SearchBar';
 
 export class NotesApp extends Component {
   constructor(props) {
@@ -75,16 +75,18 @@ export class NotesApp extends Component {
   render() {
     return (
       <>
-        <SearchBar search={this.state.search} onSearch={this.onSearchHandler} />
-        <NoteInput addNote={this.onAddNoteHandler} />
+        <Header search={this.state.search} onSearch={this.onSearchHandler} />
 
-        <NoteList
-          notes={this.state.notes}
-          onDelete={this.onDeleteHandler}
-          onArchive={this.onArchiveHandler}
-          onUnarchive={this.onUnarchiveHandler}
-          search={this.state.search}
-        />
+        <main>
+          <NoteInput addNote={this.onAddNoteHandler} />
+          <NoteList
+            notes={this.state.notes}
+            onDelete={this.onDeleteHandler}
+            onArchive={this.onArchiveHandler}
+            onUnarchive={this.onUnarchiveHandler}
+            search={this.state.search}
+          />
+        </main>
       </>
     );
   }

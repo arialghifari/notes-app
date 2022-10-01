@@ -47,7 +47,9 @@ export class NoteInput extends Component {
 
   render() {
     return (
-      <div>
+      <div className='note-input'>
+        <h2>Add Note</h2>
+
         <form onSubmit={this.onSubmitHandler}>
           <WordCounter counter={this.state.counter} />
           <input
@@ -63,8 +65,9 @@ export class NoteInput extends Component {
             placeholder='Take a note'
             value={this.state.body}
             onChange={this.onBodyChange}
+            rows='5'
           ></textarea>
-          <button type='submit'>Create Note</button>
+          <button type='submit'>Create</button>
         </form>
       </div>
     );

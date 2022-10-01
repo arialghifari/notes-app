@@ -1,6 +1,6 @@
 function SearchBar({ search, onSearch }) {
   return (
-    <div>
+    <div className='search-bar'>
       <input
         type='text'
         name='search'
