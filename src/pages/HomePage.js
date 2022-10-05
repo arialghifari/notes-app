@@ -13,7 +13,7 @@ function HomePageWrapper() {
     setSearchParams({ title: keyword });
   }
 
-  return <HomePage onSearch={changeSearchParams} keyword={title} />;
+  return <HomePage changeSearchParams={changeSearchParams} keyword={title} />;
 }
 
 class HomePage extends Component {
@@ -21,8 +21,8 @@ class HomePage extends Component {
     super(props);
 
     this.state = {
-      notes: getActiveNotes(),
-      search: '',
+      notes: getActiveNotes(props.keyword || ''),
+      search: props.keyword || '',
     };
 
     this.onSearch = this.onSearch.bind(this);
@@ -31,27 +31,12 @@ class HomePage extends Component {
   onSearch(keyword) {
     this.setState(() => {
       return {
-        notes: getActiveNotes().filter((note) =>
-          note.title.toLowerCase().includes(keyword.toLowerCase())
-        ),
+        notes: getActiveNotes(keyword),
         search: keyword,
       };
     });
 
-    this.props.onSearch(keyword);
-  }
-
-  componentDidMount() {
-    if (!this.props.keyword) {
-      this.setState(() => {
-        return {
-          notes: getActiveNotes(),
-          search: '',
-        };
-      });
-    } else {
-      this.onSearch(this.props.keyword);
-    }
+    this.props.changeSearchParams(keyword);
   }
 
   render() {

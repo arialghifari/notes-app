@@ -12,7 +12,9 @@ function ArchivedPageWrapper() {
     setSearchParams({ title: keyword });
   }
 
-  return <ArchivedPage onSearch={changeSearchParams} keyword={title} />;
+  return (
+    <ArchivedPage changeSearchParams={changeSearchParams} keyword={title} />
+  );
 }
 
 class ArchivedPage extends Component {
@@ -20,8 +22,8 @@ class ArchivedPage extends Component {
     super(props);
 
     this.state = {
-      notes: getArchivedNotes(),
-      search: '',
+      notes: getArchivedNotes(props.keyword || ''),
+      search: props.keyword || '',
     };
 
     this.onSearch = this.onSearch.bind(this);
@@ -30,27 +32,12 @@ class ArchivedPage extends Component {
   onSearch(keyword) {
     this.setState(() => {
       return {
-        notes: getArchivedNotes().filter((note) =>
-          note.title.toLowerCase().includes(keyword.toLowerCase())
-        ),
+        notes: getArchivedNotes(keyword),
         search: keyword,
       };
     });
 
-    this.props.onSearch(keyword);
-  }
-
-  componentDidMount() {
-    if (!this.props.keyword) {
-      this.setState(() => {
-        return {
-          notes: getArchivedNotes(),
-          search: '',
-        };
-      });
-    } else {
-      this.onSearch(this.props.keyword);
-    }
+    this.props.changeSearchParams(keyword);
   }
 
   render() {
