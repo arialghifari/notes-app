@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function SearchBar({ search, keyword }) {
   return (
     <div className='search-bar'>
@@ -11,5 +13,10 @@ function SearchBar({ search, keyword }) {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  search: PropTypes.func,
+  keyword: PropTypes.string,
+};
 
 export default SearchBar;

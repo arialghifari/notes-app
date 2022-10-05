@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import { getActiveNotes } from '../utils/local-data';
 import { FiPlus } from 'react-icons/fi';
 import { Link, useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,5 +59,10 @@ class HomePage extends Component {
     );
   }
 }
+
+HomePage.propTypes = {
+  changeSearchParams: PropTypes.func.isRequired,
+  keyword: PropTypes.string,
+};
 
 export default HomePageWrapper;

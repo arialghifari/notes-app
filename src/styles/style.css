@@ -152,6 +152,7 @@ form button {
 
 form button {
   cursor: pointer;
+  transition: ease-in 0.1s;
 }
 
 form button:hover {
@@ -316,6 +317,37 @@ form .word-counter {
 .button-wrapper .Archive:hover,
 .button-wrapper .Unarchive:hover {
   color: #6fb9ff;
+}
+
+.profile {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--zinc-white);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile__body {
+  line-height: 1.55rem;
+}
+
+.profile a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #6fb9ff;
+  gap: 4px;
+  border-radius: 4px;
+  width: fit-content;
+  border: 1px solid #6fb9ff;
+  padding: 8px 20px;
+  transition: ease-in 0.1s;
+}
+
+.profile a:hover {
+  color: #4297e7;
+  border: 1px solid #4297e7;
 }
 
 @media (min-width: 640px) {

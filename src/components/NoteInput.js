@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import WordCounter from './WordCounter';
+import PropTypes from 'prop-types';
 
 function NoteInput({ counter, title, titleChange, body, bodyChange, submit }) {
   const navigate = useNavigate();
@@ -28,10 +29,19 @@ function NoteInput({ counter, title, titleChange, body, bodyChange, submit }) {
           onChange={(e) => bodyChange(e.target.value)}
           rows='5'
         ></textarea>
-        <button type='submit'>Create</button>
+        <button type='submit'>CREATE</button>
       </form>
     </div>
   );
 }
+
+NoteInput.propTypes = {
+  counter: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  titleChange: PropTypes.func.isRequired,
+  body: PropTypes.string.isRequired,
+  bodyChange: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
+};
 
 export default NoteInput;
