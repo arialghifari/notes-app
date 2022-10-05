@@ -45,7 +45,7 @@ class HomePage extends Component {
         <div className='page__top'>
           <div className='page__top__add'>
             <h2 className='page__top__title'>My Notes</h2>
-            <Link to='/create' className='plus-icon'>
+            <Link to='/create' className='plus-icon' title='Create Note'>
               <FiPlus />
             </Link>
           </div>

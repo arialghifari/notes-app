@@ -264,6 +264,60 @@ form .word-counter {
   justify-content: center;
 }
 
+.detail {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--zinc-white);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail__title {
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+.detail__date {
+  color: var(--zinc-softWhite);
+}
+
+.detail__body {
+  font-size: 1.25rem;
+  line-height: 1.8rem;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.button-wrapper button {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 12px;
+  background-color: transparent;
+  color: var(--zinc-white);
+  border: 1px solid var(--zinc-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  transition: ease-in 0.1s;
+}
+
+.button-wrapper .Delete:hover {
+  color: #f35656;
+}
+
+.button-wrapper .Archive:hover,
+.button-wrapper .Unarchive:hover {
+  color: #6fb9ff;
+}
+
 @media (min-width: 640px) {
   .note-list {
     grid-template-columns: repeat(2, 1fr);
@@ -271,6 +325,11 @@ form .word-counter {
 
   .navigation {
     flex-direction: row;
+  }
+
+  .button-wrapper {
+    flex-direction: row;
+    gap: 16px;
   }
 }
 
