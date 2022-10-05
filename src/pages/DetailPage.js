@@ -8,19 +8,23 @@ import {
   unarchiveNote,
 } from '../utils/local-data';
 import { FiTrash2, FiArchive } from 'react-icons/fi';
+import NotFoundPage from './NotFoundPage';
+import parse from 'html-react-parser';
 
 function DetailPage() {
   const { id } = useParams();
-  const { title, body, createdAt, archived } = getNote(id);
+  const note = getNote(id);
+
+  if (!note) return <NotFoundPage />;
 
   return (
     <div className='detail'>
-      <h2 className='detail__title'>{title}</h2>
-      <p className='detail__date'>{showFormattedDate(createdAt)}</p>
-      <p className='detail__body'>{body}</p>
+      <h2 className='detail__title'>{note.title}</h2>
+      <p className='detail__date'>{showFormattedDate(note.createdAt)}</p>
+      <p className='detail__body'>{parse(note.body)}</p>
 
       <div className='button-wrapper'>
-        {archived ? (
+        {note.archived ? (
           <Button
             id={id}
             text='Unarchive'

@@ -23,6 +23,7 @@ function NoteInput({ counter, title, titleChange, body, bodyChange, submit }) {
           onChange={(e) => titleChange(e.target.value)}
         />
         <textarea
+          className='textarea'
           name='body'
           placeholder='Take a note'
           value={body}

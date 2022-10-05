@@ -141,13 +141,25 @@ form > * {
 }
 
 form input,
-form textarea,
+form .textarea,
 form button {
   padding: 12px;
   border: 1px solid var(--zinc-gray);
   background-color: transparent;
   color: var(--zinc-white);
   border-radius: 4px;
+}
+
+form .textarea {
+  height: 200px;
+  overflow-y: auto;
+}
+
+[contenteditable='true']:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
+  color: var(--zinc-gray);
 }
 
 form button {
@@ -348,6 +360,10 @@ form .word-counter {
 .profile a:hover {
   color: #4297e7;
   border: 1px solid #4297e7;
+}
+
+.text-center {
+  text-align: center;
 }
 
 @media (min-width: 640px) {
