@@ -1,11 +1,10 @@
 import { Component } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import SearchBar from '../components/SearchBar';
-import { getActiveNotes } from '../utils/local-data';
-import { FiPlus } from 'react-icons/fi';
-import { Link, useSearchParams } from 'react-router-dom';
+import { getArchivedNotes } from '../utils/local-data';
 
-function HomePageWrapper() {
+function ArchivedPageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
   const title = searchParams.get('title');
 
@@ -13,15 +12,15 @@ function HomePageWrapper() {
     setSearchParams({ title: keyword });
   }
 
-  return <HomePage onSearch={changeSearchParams} keyword={title} />;
+  return <ArchivedPage onSearch={changeSearchParams} keyword={title} />;
 }
 
-class HomePage extends Component {
+class ArchivedPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: getActiveNotes(),
+      notes: getArchivedNotes(),
       search: '',
     };
 
@@ -31,7 +30,7 @@ class HomePage extends Component {
   onSearch(keyword) {
     this.setState(() => {
       return {
-        notes: getActiveNotes().filter((note) =>
+        notes: getArchivedNotes().filter((note) =>
           note.title.toLowerCase().includes(keyword.toLowerCase())
         ),
         search: keyword,
@@ -45,7 +44,7 @@ class HomePage extends Component {
     if (!this.props.keyword) {
       this.setState(() => {
         return {
-          notes: getActiveNotes(),
+          notes: getArchivedNotes(),
           search: '',
         };
       });
@@ -58,13 +57,7 @@ class HomePage extends Component {
     return (
       <div className='page'>
         <div className='page__top'>
-          <div className='page__top__add'>
-            <h2 className='page__top__title'>My Notes</h2>
-            <Link to='/create' className='plus-icon'>
-              <FiPlus />
-            </Link>
-          </div>
-
+          <h2 className='page__top__title'>Archived Notes</h2>
           <SearchBar search={this.onSearch} keyword={this.state.search} />
         </div>
 
@@ -74,4 +67,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePageWrapper;
+export default ArchivedPageWrapper;

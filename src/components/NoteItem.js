@@ -6,7 +6,7 @@ function NoteItem({ id, title, body, createdAt }) {
     <div className='note-item'>
       <div className='note-wrap'>
         <h3>
-          <Link to={`detail/${id}`} className='link'>
+          <Link to={`detail/${id}`} className='link underline'>
             {title}
           </Link>
         </h3>

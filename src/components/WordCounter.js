@@ -1,5 +1,5 @@
 function WordCounter({counter}) {
-  return <p className="word-counter">{counter} character left</p>;
+  return <p className="word-counter">{counter} characters left</p>;
 }
 
 export default WordCounter;

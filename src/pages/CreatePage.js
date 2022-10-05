@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import WordCounter from '../components/WordCounter';
+import NoteInput from '../components/NoteInput';
 
 export class CreatePage extends Component {
   constructor(props) {
@@ -51,27 +51,7 @@ export class CreatePage extends Component {
         <div className='page__top'>
           <h2 className='page__top__title'>Create Note</h2>
 
-          <div className='note-input'>
-            <form onSubmit={this.onSubmitHandler}>
-              <WordCounter counter={this.state.counter} />
-              <input
-                type='text'
-                name='title'
-                placeholder='Title'
-                required
-                value={this.state.title}
-                onChange={this.onTitleChange}
-              />
-              <textarea
-                name='body'
-                placeholder='Take a note'
-                value={this.state.body}
-                onChange={this.onBodyChange}
-                rows='5'
-              ></textarea>
-              <button type='submit'>Create</button>
-            </form>
-          </div>
+          <NoteInput />
         </div>
       </div>
     );

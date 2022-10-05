@@ -32,7 +32,7 @@ let notes = [
     title: 'ESM',
     body: 'ESM (ECMAScript Module) merupakan format modularisasi standar JavaScript.',
     createdAt: '2022-04-14T04:27:34.572Z',
-    archived: false,
+    archived: true,
   },
   {
     id: 'notes-6',

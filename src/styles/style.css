@@ -28,10 +28,12 @@ header {
   width: 100%;
   padding: 0 12px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
   align-items: center;
+  gap: 12px;
 }
 
 .navigation__brand {
@@ -41,6 +43,16 @@ header {
 .navigation__brand a {
   color: var(--zinc-white);
   text-decoration: none;
+}
+
+.navigation__nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navigation__nav img {
+  border-radius: 50%;
 }
 
 main {
@@ -229,19 +241,31 @@ form .word-counter {
 }
 
 .link {
-  color: var(--zinc-white);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  color: var(--zinc-softWhite);
+  text-decoration: none;
   transition: ease-in 0.1s;
 }
 
 .link:hover {
-  color: var(--zinc-softWhite);
+  color: var(--zinc-white);
+}
+
+.link-active {
+  color: var(--zinc-white);
+}
+
+.underline {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 @media (min-width: 640px) {
   .note-list {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .navigation {
+    flex-direction: row;
   }
 }
 
