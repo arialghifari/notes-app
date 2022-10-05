@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import WordCounter from './WordCounter';
+import WordCounter from '../components/WordCounter';
 
-export class NoteInput extends Component {
+export class CreatePage extends Component {
   constructor(props) {
     super(props);
 
@@ -47,31 +47,35 @@ export class NoteInput extends Component {
 
   render() {
     return (
-      <div className='note-input'>
-        <h2>Add Note</h2>
+      <div className='page'>
+        <div className='page__top'>
+          <h2 className='page__top__title'>Create Note</h2>
 
-        <form onSubmit={this.onSubmitHandler}>
-          <WordCounter counter={this.state.counter} />
-          <input
-            type='text'
-            name='title'
-            placeholder='Title'
-            required
-            value={this.state.title}
-            onChange={this.onTitleChange}
-          />
-          <textarea
-            name='body'
-            placeholder='Take a note'
-            value={this.state.body}
-            onChange={this.onBodyChange}
-            rows='5'
-          ></textarea>
-          <button type='submit'>Create</button>
-        </form>
+          <div className='note-input'>
+            <form onSubmit={this.onSubmitHandler}>
+              <WordCounter counter={this.state.counter} />
+              <input
+                type='text'
+                name='title'
+                placeholder='Title'
+                required
+                value={this.state.title}
+                onChange={this.onTitleChange}
+              />
+              <textarea
+                name='body'
+                placeholder='Take a note'
+                value={this.state.body}
+                onChange={this.onBodyChange}
+                rows='5'
+              ></textarea>
+              <button type='submit'>Create</button>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default NoteInput;
+export default CreatePage;

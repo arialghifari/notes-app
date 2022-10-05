@@ -1,7 +1,5 @@
 import { Component } from 'react';
-import { getInitialData } from '../utils';
-import Header from './Header';
-import NoteInput from './NoteInput';
+import { getAllNotes } from '../utils/local-data';
 import NoteList from './NoteList';
 
 export class NotesApp extends Component {
@@ -9,7 +7,7 @@ export class NotesApp extends Component {
     super(props);
 
     this.state = {
-      notes: getInitialData(),
+      notes: getAllNotes(),
       search: '',
     };
 
@@ -74,20 +72,13 @@ export class NotesApp extends Component {
 
   render() {
     return (
-      <>
-        <Header search={this.state.search} onSearch={this.onSearchHandler} />
-
-        <main>
-          <NoteInput addNote={this.onAddNoteHandler} />
-          <NoteList
-            notes={this.state.notes}
-            onDelete={this.onDeleteHandler}
-            onArchive={this.onArchiveHandler}
-            onUnarchive={this.onUnarchiveHandler}
-            search={this.state.search}
-          />
-        </main>
-      </>
+      <NoteList
+        notes={this.state.notes}
+        onDelete={this.onDeleteHandler}
+        onArchive={this.onArchiveHandler}
+        onUnarchive={this.onUnarchiveHandler}
+        search={this.state.search}
+      />
     );
   }
 }

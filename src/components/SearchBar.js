@@ -1,4 +1,4 @@
-function SearchBar({ search, onSearch }) {
+function SearchBar({ search, handleSearchEvent }) {
   return (
     <div className='search-bar'>
       <input
@@ -6,7 +6,7 @@ function SearchBar({ search, onSearch }) {
         name='search'
         placeholder='Search note'
         value={search}
-        onChange={(e) => onSearch(e.target.value)}
+        onChange={(e) => handleSearchEvent(e.target.value)}
       />
     </div>
   );
