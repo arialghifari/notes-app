@@ -259,6 +259,11 @@ form .word-counter {
   text-underline-offset: 2px;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
 @media (min-width: 640px) {
   .note-list {
     grid-template-columns: repeat(2, 1fr);
