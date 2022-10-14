@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { getAccessToken, putAccessToken } from '../utils/network-data';
+import { MdOutlineGTranslate } from 'react-icons/md';
+import ThemeButton from './ThemeButton';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -39,6 +41,10 @@ function Navigation() {
           >
             Archived
           </NavLink>
+          <button className='setting'>
+            <MdOutlineGTranslate />
+          </button>
+          <ThemeButton />
           <div className='profile'>
             <button
               className='image'
@@ -54,8 +60,10 @@ function Navigation() {
         </div>
       ) : (
         <div className='navigation__nav'>
-          <button>ID</button>
-          <button>Dark</button>
+          <button className='setting'>
+            <MdOutlineGTranslate />
+          </button>
+          <ThemeButton />
         </div>
       )}
     </div>
