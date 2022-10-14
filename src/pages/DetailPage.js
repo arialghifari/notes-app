@@ -6,25 +6,38 @@ import {
   deleteNote,
   getNote,
   unarchiveNote,
-} from '../utils/local-data';
+} from '../utils/network-data';
 import { FiTrash2, FiArchive } from 'react-icons/fi';
 import NotFoundPage from './NotFoundPage';
 import parse from 'html-react-parser';
+import { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
 
 function DetailPage() {
   const { id } = useParams();
-  const note = getNote(id);
+  const [note, setNote] = useState();
 
-  if (!note) return <NotFoundPage />;
+  useEffect(() => {
+    const getNoteById = async () => {
+      const note = await getNote(id);
+      setNote(note);
+    };
+
+    getNoteById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!note) return <Loading />;
+  if (note.error) return <NotFoundPage />;
 
   return (
     <div className='detail'>
-      <h2 className='detail__title'>{note.title}</h2>
-      <p className='detail__date'>{showFormattedDate(note.createdAt)}</p>
-      <p className='detail__body'>{parse(note.body)}</p>
+      <h2 className='detail__title'>{note.data.title}</h2>
+      <p className='detail__date'>{showFormattedDate(note.data.createdAt)}</p>
+      <p className='detail__body'>{parse(note.data.body)}</p>
 
       <div className='button-wrapper'>
-        {note.archived ? (
+        {note.data.archived ? (
           <Button
             id={id}
             text='Unarchive'

@@ -15,7 +15,9 @@ async function fetchWithToken(url, options = {}) {
       ...options.headers,
       Authorization: `Bearer ${getAccessToken()}`,
     },
-  });
+  }).then((data) =>
+    data.statusText === 'Unauthorized' ? putAccessToken('') : data
+  );
 }
 
 async function login({ email, password }) {
@@ -39,7 +41,7 @@ async function login({ email, password }) {
 
 async function register({ name, email, password, confirmPassword }) {
   if (password !== confirmPassword) {
-    alert('Confirm password doesn\'t match');
+    alert("Confirm password doesn't match");
     return { error: true };
   }
 

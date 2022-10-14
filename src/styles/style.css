@@ -406,6 +406,14 @@ button.logout {
   display: none;
 }
 
+.loading {
+  text-align: center;
+  color: var(--zinc-softWhite);
+  animation: pulse 2s infinite;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+}
+
 @media (min-width: 640px) {
   .note-list {
     grid-template-columns: repeat(2, 1fr);
@@ -433,5 +441,36 @@ button.logout {
 
   .note-list {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  10%,
+  90% {
+    opacity: 0.8;
+  }
+
+  20%,
+  80% {
+    opacity: 0.6;
+  }
+
+  30%,
+  70% {
+    opacity: 0.4;
+  }
+
+  40%,
+  60% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0;
   }
 }

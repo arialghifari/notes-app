@@ -1,18 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import WordCounter from './WordCounter';
 import PropTypes from 'prop-types';
 
 function NoteInput({ counter, title, titleChange, body, bodyChange, submit }) {
-  const navigate = useNavigate();
-
-  function handleSubmit(e) {
-    submit(e);
-    navigate('/');
-  }
-
   return (
     <div className='note-input'>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={submit}>
         <WordCounter counter={counter} />
         <input
           type='text'
@@ -27,7 +19,7 @@ function NoteInput({ counter, title, titleChange, body, bodyChange, submit }) {
           name='body'
           placeholder='Take a note'
           value={body}
-          onChange={(e) => bodyChange(e.target.value)}
+          onChange={bodyChange}
           rows='5'
         ></textarea>
         <button type='submit'>CREATE</button>

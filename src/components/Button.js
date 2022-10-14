@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 function Button({ id, type, text, icon }) {
   const navigate = useNavigate();
 
-  function handleClick() {
-    type(id);
+  const handleClick = async () => {
+    await type(id);
     navigate('/');
-  }
+  };
 
   return (
-    <button className={text} onClick={() => handleClick()}>
+    <button className={text} onClick={handleClick}>
       {text.toUpperCase()} {icon}
     </button>
   );

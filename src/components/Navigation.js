@@ -7,7 +7,7 @@ function Navigation() {
   const [show, setShow] = useState(false);
   const userToken = getAccessToken();
 
-  const onLogout = () => {
+  const onLogout = async () => {
     putAccessToken('');
     setShow(false);
     navigate('/login');
@@ -16,7 +16,7 @@ function Navigation() {
   return (
     <div className='navigation'>
       <h1 className='navigation__brand'>
-        <Link to='/'>NOTES APP</Link>
+        <Link to={userToken ? '/' : '/login'}>NOTES APP</Link>
       </h1>
 
       {userToken ? (
@@ -44,7 +44,7 @@ function Navigation() {
               className='image'
               onClick={() => setShow((prevShow) => !prevShow)}
             >
-              <img src='/image/avatar.jpg' alt='avatar' />
+              <img src='/image/avatar.png' alt='avatar' />
             </button>
 
             <button className={show ? `logout` : 'hide'} onClick={onLogout}>

@@ -1,68 +1,51 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import NoteList from '../components/NoteList';
 import SearchBar from '../components/SearchBar';
-import { getActiveNotes } from '../utils/local-data';
+import { getActiveNotes } from '../utils/network-data';
 import { FiPlus } from 'react-icons/fi';
 import { Link, useSearchParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import Loading from '../components/Loading';
 
-function HomePageWrapper() {
+function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const title = searchParams.get('title');
+  const keyword = searchParams.get('keyword') || '';
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  function changeSearchParams(keyword) {
-    setSearchParams({ title: keyword });
-  }
-
-  return <HomePage changeSearchParams={changeSearchParams} keyword={title} />;
-}
-
-class HomePage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      notes: getActiveNotes(props.keyword || ''),
-      search: props.keyword || '',
+  useEffect(() => {
+    const activeNotes = async () => {
+      const notes = await getActiveNotes();
+      setNotes(notes.data);
+      setLoading(false);
     };
 
-    this.onSearch = this.onSearch.bind(this);
-  }
+    activeNotes();
+  }, []);
 
-  onSearch(keyword) {
-    this.setState(() => {
-      return {
-        notes: getActiveNotes(keyword),
-        search: keyword,
-      };
-    });
+  const onSearch = (keyword) => {
+    setSearchParams({ keyword });
+  };
 
-    this.props.changeSearchParams(keyword);
-  }
+  const activeNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(keyword)
+  );
 
-  render() {
-    return (
-      <div className='page'>
-        <div className='page__top'>
-          <div className='page__top__add'>
-            <h2 className='page__top__title'>My Notes</h2>
-            <Link to='/create' className='plus-icon' title='Create Note'>
-              <FiPlus />
-            </Link>
-          </div>
-
-          <SearchBar search={this.onSearch} keyword={this.state.search} />
+  return (
+    <div className='page'>
+      <div className='page__top'>
+        <div className='page__top__add'>
+          <h2 className='page__top__title'>My Notes</h2>
+          <Link to='/create' className='plus-icon' title='Create Note'>
+            <FiPlus />
+          </Link>
         </div>
 
-        <NoteList notes={this.state.notes} />
+        <SearchBar onSearch={onSearch} keyword={keyword} />
       </div>
-    );
-  }
+
+      {loading ? <Loading /> : <NoteList notes={activeNotes} />}
+    </div>
+  );
 }
 
-HomePage.propTypes = {
-  changeSearchParams: PropTypes.func.isRequired,
-  keyword: PropTypes.string,
-};
-
-export default HomePageWrapper;
+export default HomePage;

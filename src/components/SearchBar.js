@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function SearchBar({ search, keyword }) {
+function SearchBar({ onSearch, keyword }) {
   return (
     <div className='search-bar'>
       <input
@@ -8,7 +8,7 @@ function SearchBar({ search, keyword }) {
         name='search'
         placeholder='Search note'
         value={keyword}
-        onChange={(e) => search(e.target.value)}
+        onChange={(e) => onSearch(e.target.value)}
       />
     </div>
   );

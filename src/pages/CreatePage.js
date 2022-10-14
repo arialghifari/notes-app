@@ -1,66 +1,44 @@
-import { Component } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NoteInput from '../components/NoteInput';
-import { addNote } from '../utils/local-data';
+import useInput from '../hooks/useInput';
+import { addNote } from '../utils/network-data';
 
-export class CreatePage extends Component {
-  constructor(props) {
-    super(props);
+function CreatePage() {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [body, onBodyChange] = useInput('');
+  const [counter, setCounter] = useState(50);
 
-    this.state = {
-      title: '',
-      body: '',
-      counter: 50,
-    };
-
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onBodyChange = this.onBodyChange.bind(this);
-    this.onSubmitHandler = this.onSubmitHandler.bind(this);
-  }
-
-  onTitleChange(title) {
+  const onTitleChange = (title) => {
     if (title.length > 50) return;
 
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        title,
-        counter: 50 - title.length,
-      };
-    });
-  }
+    setTitle(title);
+    setCounter(50 - title.length);
+  };
 
-  onBodyChange(body) {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        body,
-      };
-    });
-  }
-
-  onSubmitHandler(e) {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    addNote({ title: this.state.title, body: this.state.body });
-  }
+    await addNote({ title, body });
+    navigate('/');
+  };
 
-  render() {
-    return (
-      <div className='page'>
-        <div className='page__top'>
-          <h2 className='page__top__title'>Create Note</h2>
+  return (
+    <div className='page'>
+      <div className='page__top'>
+        <h2 className='page__top__title'>Create Note</h2>
 
-          <NoteInput
-            counter={this.state.counter}
-            title={this.state.title}
-            titleChange={this.onTitleChange}
-            body={this.state.body}
-            bodyChange={this.onBodyChange}
-            submit={this.onSubmitHandler}
-          />
-        </div>
+        <NoteInput
+          counter={counter}
+          title={title}
+          titleChange={onTitleChange}
+          body={body}
+          bodyChange={onBodyChange}
+          submit={onSubmitHandler}
+        />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default CreatePage;

@@ -1,63 +1,44 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import Loading from '../components/Loading';
 import NoteList from '../components/NoteList';
 import SearchBar from '../components/SearchBar';
-import { getArchivedNotes } from '../utils/local-data';
-import PropTypes from 'prop-types';
+import { getArchivedNotes } from '../utils/network-data';
 
-function ArchivedPageWrapper() {
+function ArchivedPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const title = searchParams.get('title');
+  const keyword = searchParams.get('keyword') || '';
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  function changeSearchParams(keyword) {
-    setSearchParams({ title: keyword });
-  }
+  useEffect(() => {
+    const activeNotes = async () => {
+      const notes = await getArchivedNotes();
+      setNotes(notes.data);
+      setLoading(false)
+    };
+
+    activeNotes();
+  }, []);
+
+  const onSearch = (keyword) => {
+    setSearchParams({ keyword });
+  };
+
+  const archivedNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(keyword)
+  );
 
   return (
-    <ArchivedPage changeSearchParams={changeSearchParams} keyword={title} />
+    <div className='page'>
+      <div className='page__top'>
+        <h2 className='page__top__title'>Archived Notes</h2>
+        <SearchBar onSearch={onSearch} keyword={keyword} />
+      </div>
+
+      {loading ? <Loading /> : <NoteList notes={archivedNotes} />}
+    </div>
   );
 }
 
-class ArchivedPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      notes: getArchivedNotes(props.keyword || ''),
-      search: props.keyword || '',
-    };
-
-    this.onSearch = this.onSearch.bind(this);
-  }
-
-  onSearch(keyword) {
-    this.setState(() => {
-      return {
-        notes: getArchivedNotes(keyword),
-        search: keyword,
-      };
-    });
-
-    this.props.changeSearchParams(keyword);
-  }
-
-  render() {
-    return (
-      <div className='page'>
-        <div className='page__top'>
-          <h2 className='page__top__title'>Archived Notes</h2>
-          <SearchBar search={this.onSearch} keyword={this.state.search} />
-        </div>
-
-        <NoteList notes={this.state.notes} />
-      </div>
-    );
-  }
-}
-
-ArchivedPage.propTypes = {
-  changeSearchParams: PropTypes.func.isRequired,
-  keyword: PropTypes.string,
-};
-
-export default ArchivedPageWrapper;
+export default ArchivedPage;

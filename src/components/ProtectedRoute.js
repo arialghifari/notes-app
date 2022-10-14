@@ -9,7 +9,6 @@ const ProtectedRoute = ({ children, loginOnlyPage = true }) => {
   useEffect(() => {
     if (!userToken && loginOnlyPage) return navigate('/login');
     if (userToken && !loginOnlyPage) return navigate('/');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   return children;
