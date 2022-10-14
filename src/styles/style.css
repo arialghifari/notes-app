@@ -366,6 +366,46 @@ form .word-counter {
   text-align: center;
 }
 
+.mb {
+  margin-bottom: 1rem;
+}
+
+.helper-text {
+  color: var(--zinc-softWhite);
+  margin-top: 1rem;
+}
+
+.helper-text a {
+  color: var(--zinc-softWhite);
+}
+
+.profile {
+  position: relative;
+}
+
+button.image {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button.logout {
+  position: absolute;
+  bottom: -2.5rem;
+  right: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--zinc-gray);
+  border-radius: 2px;
+  background-color: var(--zinc-black);
+  color: var(--zinc-softWhite);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.hide {
+  display: none;
+}
+
 @media (min-width: 640px) {
   .note-list {
     grid-template-columns: repeat(2, 1fr);

@@ -3,9 +3,11 @@ import Navigation from './components/Navigation';
 import CreatePage from './pages/CreatePage';
 import ArchivedPage from './pages/ArchivedPage';
 import HomePage from './pages/HomePage';
-import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 import DetailPage from './pages/DetailPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -16,11 +18,13 @@ function App() {
 
       <main>
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/archived' element={<ArchivedPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/create' element={<CreatePage />} />
-          <Route path='/detail/:id' element={<DetailPage />} />
+          <Route path='/' element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+          <Route path='/archived' element={<ProtectedRoute><ArchivedPage /></ProtectedRoute>} />
+          <Route path='/create' element={<ProtectedRoute><CreatePage /></ProtectedRoute>} />
+          <Route path='/detail/:id' element={<ProtectedRoute><DetailPage /></ProtectedRoute>} />
+          
+          <Route path='/login' element={<ProtectedRoute loginOnlyPage={false}><LoginPage /></ProtectedRoute>} />
+          <Route path='/register' element={<ProtectedRoute loginOnlyPage={false}><RegisterPage /></ProtectedRoute>} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
