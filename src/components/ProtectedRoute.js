@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAccessToken } from '../utils/network-data';
+import PropTypes from 'prop-types';
 
 const ProtectedRoute = ({ children, loginOnlyPage = true }) => {
   const navigate = useNavigate();
@@ -12,6 +13,11 @@ const ProtectedRoute = ({ children, loginOnlyPage = true }) => {
   });
 
   return children;
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.object.isRequired,
+  loginOnlyPage: PropTypes.bool,
 };
 
 export default ProtectedRoute;

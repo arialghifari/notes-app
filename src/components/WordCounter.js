@@ -8,6 +8,9 @@ function WordCounter({ counter, locale }) {
   );
 }
 
-WordCounter.propTypes = { counter: PropTypes.number.isRequired };
+WordCounter.propTypes = {
+  counter: PropTypes.number.isRequired,
+  locale: PropTypes.string.isRequired,
+};
 
 export default WordCounter;

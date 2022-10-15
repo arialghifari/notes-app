@@ -17,6 +17,7 @@ function SearchBar({ onSearch, keyword, locale }) {
 SearchBar.propTypes = {
   search: PropTypes.func,
   keyword: PropTypes.string,
+  locale: PropTypes.string.isRequired,
 };
 
 export default SearchBar;

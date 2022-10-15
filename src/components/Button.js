@@ -21,6 +21,7 @@ Button.propTypes = {
   type: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   icon: PropTypes.object.isRequired,
+  locale: PropTypes.string.isRequired,
 };
 
 export default Button;

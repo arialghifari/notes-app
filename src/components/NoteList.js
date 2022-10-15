@@ -15,6 +15,7 @@ function NoteList({ notes, locale }) {
 
 NoteList.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.object),
+  locale: PropTypes.string.isRequired,
 };
 
 export default NoteList;
