@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom';
 import { showFormattedDate } from '../utils';
 import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
+import { useContext } from 'react';
+import LocaleContext from '../context/LocaleContext';
 
 function NoteItem({ id, title, body, createdAt }) {
+  const { locale } = useContext(LocaleContext);
+
   return (
     <div className='note-item'>
       <div className='note-wrap'>
@@ -12,7 +16,7 @@ function NoteItem({ id, title, body, createdAt }) {
             {title}
           </Link>
         </h3>
-        <p className='date'>{showFormattedDate(createdAt)}</p>
+        <p className='date'>{showFormattedDate(createdAt, locale)}</p>
         <p className='body'>{parse(body)}</p>
       </div>
     </div>

@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { getAccessToken, putAccessToken } from '../utils/network-data';
-import { MdOutlineGTranslate } from 'react-icons/md';
 import ThemeButton from './ThemeButton';
+import LocaleContext from '../context/LocaleContext';
+import LocaleButton from './LocaleButton';
+import { navigation } from '../utils/content';
 
 function Navigation() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const userToken = getAccessToken();
+  const { locale } = useContext(LocaleContext);
 
   const onLogout = async () => {
     putAccessToken('');
@@ -18,7 +21,7 @@ function Navigation() {
   return (
     <div className='navigation'>
       <h1 className='navigation__brand'>
-        <Link to={userToken ? '/' : '/login'}>NOTES APP</Link>
+        <Link to={userToken ? '/' : '/login'}>{navigation[locale].title}</Link>
       </h1>
 
       {userToken ? (
@@ -30,7 +33,7 @@ function Navigation() {
             }
             end
           >
-            My Notes
+            {navigation[locale].navNotes}
           </NavLink>
           <NavLink
             to='/archived'
@@ -39,11 +42,9 @@ function Navigation() {
             }
             end
           >
-            Archived
+            {navigation[locale].navArchived}
           </NavLink>
-          <button className='setting'>
-            <MdOutlineGTranslate />
-          </button>
+          <LocaleButton />
           <ThemeButton />
           <div className='profile'>
             <button
@@ -54,15 +55,13 @@ function Navigation() {
             </button>
 
             <button className={show ? `logout` : 'hide'} onClick={onLogout}>
-              Logout
+              {navigation[locale].logout}
             </button>
           </div>
         </div>
       ) : (
         <div className='navigation__nav'>
-          <button className='setting'>
-            <MdOutlineGTranslate />
-          </button>
+          <LocaleButton />
           <ThemeButton />
         </div>
       )}

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 
-function SearchBar({ onSearch, keyword }) {
+function SearchBar({ onSearch, keyword, locale }) {
   return (
     <div className='search-bar'>
       <input
         type='text'
         name='search'
-        placeholder='Search note'
+        placeholder={locale}
         value={keyword}
         onChange={(e) => onSearch(e.target.value)}
       />

@@ -1,11 +1,11 @@
 import NoteItem from './NoteItem';
 import PropTypes from 'prop-types';
 
-function NoteList({ notes }) {
+function NoteList({ notes, locale }) {
   return (
     <div className='note-list'>
       {notes.length <= 0 ? (
-        <p className='empty'>Empty notes</p>
+        <p className='empty'>{locale}</p>
       ) : (
         notes.map((note) => <NoteItem key={note.id} {...note} />)
       )}

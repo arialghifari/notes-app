@@ -1,11 +1,15 @@
+import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import { login, putAccessToken } from '../utils/network-data';
+import LocaleContext from '../context/LocaleContext';
+import { loginPage } from '../utils/content';
 
 function LoginPage() {
   const navigate = useNavigate();
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const { locale } = useContext(LocaleContext);
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -20,7 +24,7 @@ function LoginPage() {
   return (
     <div className='page'>
       <div className='page__top'>
-        <h2 className='page__top__title mb'>Login to create note</h2>
+        <h2 className='page__top__title mb'>{loginPage[locale].title}</h2>
 
         <div className='note-input'>
           <form onSubmit={onLogin}>
@@ -40,11 +44,11 @@ function LoginPage() {
               value={password}
               onChange={onPasswordChange}
             />
-            <button type='submit'>LOGIN</button>
+            <button type='submit'>{loginPage[locale].button}</button>
           </form>
 
           <p className='helper-text'>
-            Don't have account? <Link to='/register'>Register</Link>
+            {loginPage[locale].text} <Link to='/register'>{loginPage[locale].link}</Link>
           </p>
         </div>
       </div>

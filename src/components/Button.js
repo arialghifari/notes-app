@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function Button({ id, type, text, icon }) {
+function Button({ id, type, text, icon, locale }) {
   const navigate = useNavigate();
 
   const handleClick = async () => {
@@ -11,7 +11,7 @@ function Button({ id, type, text, icon }) {
 
   return (
     <button className={text} onClick={handleClick}>
-      {text.toUpperCase()} {icon}
+      {locale} {icon}
     </button>
   );
 }

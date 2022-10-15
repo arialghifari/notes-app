@@ -1,5 +1,8 @@
+import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import LocaleContext from '../context/LocaleContext';
 import useInput from '../hooks/useInput';
+import { registerPage } from '../utils/content';
 import { register } from '../utils/network-data';
 
 function RegisterPage() {
@@ -8,18 +11,19 @@ function RegisterPage() {
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
   const [confirmPassword, onConfirmPasswordChange] = useInput('');
+  const { locale } = useContext(LocaleContext);
 
   const onRegister = async (e) => {
     e.preventDefault();
 
     const data = await register({ name, email, password, confirmPassword });
-    if (!data.error) navigate('/login')
+    if (!data.error) navigate('/login');
   };
 
   return (
     <div className='page'>
       <div className='page__top'>
-        <h2 className='page__top__title mb'>Register to create note</h2>
+        <h2 className='page__top__title mb'>{registerPage[locale].title}</h2>
 
         <div className='note-input'>
           <form onSubmit={onRegister}>
@@ -50,16 +54,17 @@ function RegisterPage() {
             <input
               type='password'
               name='confirmPassword'
-              placeholder='Confirm Password'
+              placeholder={registerPage[locale].confirmPassword}
               required
               value={confirmPassword}
               onChange={onConfirmPasswordChange}
             />
-            <button type='submit'>REGISTER</button>
+            <button type='submit'>{registerPage[locale].button}</button>
           </form>
 
           <p className='helper-text'>
-            Already have account? <Link to='/login'>Login</Link>
+            {registerPage[locale].text}{' '}
+            <Link to='/login'>{registerPage[locale].link}</Link>
           </p>
         </div>
       </div>

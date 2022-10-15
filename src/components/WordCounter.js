@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 
-function WordCounter({ counter }) {
-  return <p className='word-counter'>{counter} characters left</p>;
+function WordCounter({ counter, locale }) {
+  return (
+    <p className='word-counter'>
+      {counter} {locale}
+    </p>
+  );
 }
 
 WordCounter.propTypes = { counter: PropTypes.number.isRequired };
